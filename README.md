@@ -7,7 +7,7 @@ Uso:
 
 ```javascript
 
-const SELECTOR = '#page';
+const SELECTOR = '#page-wrapper';
 const INTERVAL_MS = 60 * 1000;
 
 setInterval(() => {
