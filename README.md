@@ -9,9 +9,16 @@ Nueva versión: genera un fetch, ya que Moodle cuenta desde el servidor el tiemp
 
 ```javascript
 
-const INTERVAL_MS = 5 * 60 * 1000; // cada 5 min es más que suficiente
+const minMinutes = 10;
+const maxMinutes = 35;
 
-setInterval(async () => {
+// Función para calcular un milisegundo aleatorio entre los rangos
+function getNextInterval() {
+  const minutes = Math.floor(Math.random() * (maxMinutes - minMinutes + 1)) + minMinutes;
+  return minutes * 60000;
+}
+
+async function runKeepAlive() {
   try {
     const res = await fetch(location.href, {
       method: 'GET',
@@ -20,6 +27,15 @@ setInterval(async () => {
     console.log(`✓ Keep-alive enviado [${res.status}] - ${new Date().toLocaleTimeString()}`);
   } catch (err) {
     console.error('✗ Error en keep-alive:', err);
+  } finally {
+    // Programa la siguiente ejecución con un tiempo nuevo y aleatorio
+    const nextInterval = getNextInterval();
+    console.log(`Próximo envío en: ${nextInterval / 60000} minutos.`);
+    setTimeout(runKeepAlive, nextInterval);
   }
-}, INTERVAL_MS);
+}
+
+// Iniciar el primer ciclo
+setTimeout(runKeepAlive, getNextInterval());
+
 ```
