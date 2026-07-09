@@ -5,7 +5,9 @@ Uso:
 - F12 para abrir las herramientas de desarrollo, click en "consola"
 - Copiar y pegar.
 
-Nueva versión: genera un fetch, ya que Moodle cuenta desde el servidor el tiempo asi que da lo mismo usar un clicker en el navegador hoohho
+Actualizaciones:
+- Intervalo aleatorio entre 10 y 35 min
+- Envía un GET en lugar de click.
 
 ```javascript
 
